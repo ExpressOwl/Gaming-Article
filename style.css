@@ -1,0 +1,36 @@
+*, *::after, *::before {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* colors */
+  --hue: 36;
+  --sat: 100%;
+
+  /* default light */
+  --accent: var(--hue) var(--sat) 50%;
+  --background: var(--hue) var(--sat) 99%; /* 99 is almost white*/
+  --text: var(--hue) var(--sat) 4%;
+
+    /* dark mode */
+    --accent--dark: var(--hue) var(--sat) 60%; /* slight lighter than light mode actually*/
+    --background--dark: var(--hue) 20% 16%; /* Saturation is 20%, brightness is 16%*/
+    --text--dark: var(--hue) 15% 85%;
+}
+
+@media (prefers-color-scheme: dark) { /* Used to detect users preference through their operating system */
+  :root {
+    --accent: var(--accent--dark);
+    --background: var(--background--dark);
+    --text: var(--text--dark);
+  }
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--text));
+
+}
