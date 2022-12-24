@@ -8,7 +8,7 @@
 
 :root {
   /* colors */
-  --hue: 36;
+  --hue: 340;
   --sat: 100%;
 
   /* default light */
@@ -88,7 +88,7 @@ body {
   display: grid;
   margin: var(--spacer--md) 0; /* No space left or right because it will look weird*/
   gap: var(--spacer--sm); /* Space between sections, can be seen using dev tools, on Firefox anyway */
-  grid-template-columns: repeat(21, 1fr);
+  grid-template-columns: repeat(21, 1fr); /* 21 grid system */
   grid-template-rows: auto;
 }
 
@@ -194,7 +194,103 @@ article p {
 }
 /* Article */
 
-
+/* Sidebar */
 .sidebar {
   grid-area: 4/2/5/-2;
+  display: flex;
+  flex-wrap: wrap; /* Wrap downwards on a small enough screen*/
+  gap: var(--spacer--lg);
+  align-items: flex-start; /* Prevents tags and sidebar heading to stretch on a wider screen */
+  align-content: flex-start; /* Brings the Related posts up a bit on a 1000px+ screen */
 }
+
+.sidebar_header {
+  border-bottom: 4px solid hsl(var(--text));
+  padding-bottom: .5rem;
+}
+
+.sidebar_tags, .sidebar_related {
+  display: grid;
+  gap: .8rem;
+}
+
+.related_post_container {
+  display: grid;
+  gap: .5rem;
+}
+
+.related_post a {
+  color: hsl(var(--text));
+  text-decoration: none;
+}
+
+.tags_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .7rem;
+}
+/* Sidebar */
+
+/* Media query */
+@media only screen and (min-width: 600px) {
+  .sidebar_tags, .sidebar_related {
+    flex: 1 1 40%; /* grow/shrink/Related Posts will snap down once it can't sustain 40% */
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  :root {
+    font-size: 18px;
+  }
+  .container {
+    grid-template-columns: repeat(15, 1fr);
+  }
+  .share_social {
+    margin-left: calc(100% / 15); /* Same situation as before, calc to align the socials */
+  }
+  article {
+    grid-area: 3/2/4/10; /* At rows 3 and 4, columns 2 and 10*/
+  }
+  .sidebar {
+    grid-area: 3/11/4/-2; /* Take up the space besides the article on a bigger screen, hence the column start at 11 and ending of second last column*/
+    margin: var(--spacer--md); /* Fixes the margin when the article and article tags are together*/
+  }
+  .article_author {
+    text-align: left;
+    flex-wrap: nowrap;
+    position: relative; /* Allows a psuedo element to be positioned*/
+  }
+  .article_author::before {
+    content: '';
+    position: absolute;
+    width: 26px;
+    height: 80%;
+    background-color: hsl(var(--accent));
+    left: calc(var(--spacer--md) *-.4);
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .container {
+    grid-template-columns: repeat(21, 1fr); /* Back to 21 grid system */
+  }
+  .sidebar_tags, .sidebar_related {
+    flex: 1 1 100%;
+  }
+  .social_text {
+    display: block;
+  }
+  .share_social {
+    flex-direction: column;
+    gap: .9rem;
+    margin-left: calc(100% / 21);
+  }
+  article {
+    grid-area: 3/3/4/15;
+  }
+  .sidebar {
+    grid-area: 3/15/4/-2;
+    margin-left: calc(var(--spacer--md) + var(--spacer--sm));
+  }
+}
+/* Media query */
