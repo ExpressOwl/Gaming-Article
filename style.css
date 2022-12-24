@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
 
 :root {
@@ -19,6 +20,20 @@
     --accent--dark: var(--hue) var(--sat) 60%; /* slight lighter than light mode actually*/
     --background--dark: var(--hue) 20% 16%; /* Saturation is 20%, brightness is 16%*/
     --text--dark: var(--hue) 15% 85%;
+
+    /* Layout, consistent spacing */
+    /* https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/ */
+    --spacer--sm: clamp(12px, 6.615383px + 1.538462vw, 22px);
+    --spacer--md: clamp(24px, 15.384617px + 2.461538vw, 40px);
+    --spacer--lg: clamp(32px, 8.8461525px + 6.615385vw, 75px);
+
+    /* Font */
+    font-size: 16px;
+    --font--sm: clamp(.75rem, 0.59090903rem + 0.727273vw, 1rem);
+    --font4: clamp(1.18rem, 0.94454538rem + 1.076364vw, 1.55rem);
+    --font3: clamp(1.35rem, 0.93636366rem + 1.890909vw, 2rem);
+    --font2: clamp(1.5rem, 0.73636366rem + 3.490909vw, 2.7rem);
+    --font1: clamp(2rem, -0.22727269rem + 10.181818vw, 5.5rem);
 }
 
 @media (prefers-color-scheme: dark) { /* Used to detect users preference through their operating system */
@@ -29,8 +44,40 @@
   }
 }
 
+h1, h2, h3, .h3, h4 {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: var(--font1);
+  line-height: 1;
+}
+
+h2 {
+  font-size: var(--font2);
+}
+
+h3, .h3 {
+  font-size: var(--font3);
+}
+
+h4 {
+  font-size: var(--font4);
+}
+
+p {
+  line-height: 1.4;
+}
+
+small {
+  font-size: var(--font--sm);
+}
+
+.capitalized {
+  text-transform: uppercase;
+}
+
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--text));
-
 }
